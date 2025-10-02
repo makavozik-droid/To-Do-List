@@ -1,0 +1,80 @@
+/*==========================================================*/
+/* Демонстрація спадкування та каскадності */
+/*==========================================================*/
+
+/* Спадкування: всі елементи на сторінці успадковують шрифт від <body> */
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+/* Каскадність: базовий стиль для списку */
+.todo-list {
+    color: #333;
+    padding-left: 20px;
+    list-style-type: square;
+}
+
+/* Каскадність: цей стиль більш специфічний і перекриває попередній для
+   елементів із класом .completed */
+.todo-item.completed {
+    color: #28a745; /* Зелений колір */
+    text-decoration: line-through;
+}
+
+/* Перевірка !important:
+   Якщо додати !important до наступного правила,
+   воно перекриє навіть правило з .completed,
+   і текст стане синім, незважаючи на виконане завдання.
+   !important слід використовувати обережно. */
+/*
+.todo-item {
+    color: blue !important;
+}
+*/
+
+/*==========================================================*/
+/* Стилізація чекбоксів (без JS) */
+/*==========================================================*/
+
+/* Приховуємо стандартний чекбокс */
+.todo-item input[type="checkbox"] {
+    display: none;
+}
+
+/* Стилізуємо кастомний чекбокс за допомогою псевдоелемента ::before */
+.todo-item label::before {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;
+    border: 2px solid var(--secondary-color, #28a745);
+    background-color: transparent;
+    vertical-align: middle;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Стилізація кастомного чекбокса, коли він відмічений */
+.todo-item input[type="checkbox"]:checked + label::before {
+    background-color: var(--secondary-color, #28a745);
+    border-color: var(--secondary-color, #28a745);
+}
+
+/* Додаємо позначку (✓) всередину відміченого чекбокса */
+.todo-item input[type="checkbox"]:checked + label::after {
+    content: '✓';
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    position: absolute;
+    left: 4px;
+    top: 2px;
+}
+
+/* Стилі для тексту, коли чекбокс відмічений */
+.todo-item input[type="checkbox"]:checked + label {
+    text-decoration: line-through; /* Закреслюємо текст */
+    color: #28a745;
+}
