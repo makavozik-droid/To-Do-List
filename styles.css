@@ -1,80 +1,174 @@
 /*==========================================================*/
-/* Демонстрація спадкування та каскадності */
+/* Загальні стилі та змінні */
 /*==========================================================*/
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #ecf0f1;
+    --text-color: #333;
+    --completed-color: #2ecc71;
+    --hover-color: #f1c40f;
+    --font-family: 'Segoe UI', Arial, sans-serif;
+}
 
-/* Спадкування: всі елементи на сторінці успадковують шрифт від <body> */
 body {
-    font-family: Arial, sans-serif;
+    font-family: var(--font-family);
+    background-color: var(--secondary-color);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 500px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    overflow: hidden;
+    animation: fadeIn 0.8s ease-out;
+}
+
+/* Анімація появи */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/*==========================================================*/
+/* Заголовок та поле введення */
+/*==========================================================*/
+.app-header {
+    background: var(--primary-color);
+    color: white;
     padding: 20px;
+    text-align: center;
+}
+.header-title {
+    margin: 0;
+    font-size: 1.8em;
+}
+.header-date {
+    opacity: 0.8;
+    margin: 5px 0 0;
+}
+.add-task-section {
+    display: flex;
+    padding: 20px;
+    background-color: var(--secondary-color);
+}
+#new-task-input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 2px solid var(--border-color, #ccc);
+    border-radius: 8px;
+    font-size: 1em;
+    transition: all 0.3s;
+}
+#new-task-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+}
+#add-task-btn {
+    margin-left: 10px;
+    padding: 10px 15px;
+    border: none;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.3s;
+}
+#add-task-btn:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
 }
 
-/* Каскадність: базовий стиль для списку */
+/*==========================================================*/
+/* Стилізація списку завдань */
+/*==========================================================*/
 .todo-list {
-    color: #333;
-    padding-left: 20px;
-    list-style-type: square;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
 }
-
-/* Каскадність: цей стиль більш специфічний і перекриває попередній для
-   елементів із класом .completed */
-.todo-item.completed {
-    color: #28a745; /* Зелений колір */
-    text-decoration: line-through;
-}
-
-/* Перевірка !important:
-   Якщо додати !important до наступного правила,
-   воно перекриє навіть правило з .completed,
-   і текст стане синім, незважаючи на виконане завдання.
-   !important слід використовувати обережно. */
-/*
 .todo-item {
-    color: blue !important;
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.3s, transform 0.3s;
+    position: relative;
+    cursor: pointer;
 }
-*/
+.todo-item:hover {
+    background-color: #f9f9f9;
+    transform: translateX(5px);
+}
+.todo-item:last-child {
+    border-bottom: none;
+}
+.todo-item .task-icon {
+    font-size: 1.2em;
+    color: var(--primary-color);
+    margin-right: 15px;
+}
+.todo-item .item-date {
+    margin-left: auto;
+    font-size: 0.8em;
+    color: #999;
+    transition: color 0.3s;
+}
 
 /*==========================================================*/
-/* Стилізація чекбоксів (без JS) */
+/* Стилізація чекбоксів та виконаних завдань */
 /*==========================================================*/
 
-/* Приховуємо стандартний чекбокс */
+/* Ховаємо стандартний чекбокс */
 .todo-item input[type="checkbox"] {
     display: none;
 }
-
-/* Стилізуємо кастомний чекбокс за допомогою псевдоелемента ::before */
-.todo-item label::before {
-    content: '';
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    margin-right: 10px;
-    border: 2px solid var(--secondary-color, #28a745);
-    background-color: transparent;
-    vertical-align: middle;
+/* Стилізуємо мітку, яка буде служити кастомним чекбоксом */
+.todo-item label {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
     cursor: pointer;
-    transition: all 0.2s ease-in-out;
+}
+/* Стилізуємо відмічений стан */
+.todo-item.completed {
+    background-color: #f1f8e9;
+}
+.todo-item.completed .task-text {
+    text-decoration: line-through;
+    color: var(--completed-color);
+    opacity: 0.7;
+}
+.todo-item.completed .task-icon {
+    color: var(--completed-color);
+    animation: bounce 0.5s;
+}
+@keyframes bounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
 }
 
-/* Стилізація кастомного чекбокса, коли він відмічений */
-.todo-item input[type="checkbox"]:checked + label::before {
-    background-color: var(--secondary-color, #28a745);
-    border-color: var(--secondary-color, #28a745);
-}
-
-/* Додаємо позначку (✓) всередину відміченого чекбокса */
-.todo-item input[type="checkbox"]:checked + label::after {
-    content: '✓';
-    color: white;
-    font-size: 14px;
-    font-weight: bold;
+/* Спливаючі елементи (приклад) */
+.todo-item::before {
+    content: '';
     position: absolute;
-    left: 4px;
-    top: 2px;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background: var(--primary-color);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.3s ease;
 }
-
-/* Стилі для тексту, коли чекбокс відмічений */
-.todo-item input[type="checkbox"]:checked + label {
-    text-decoration: line-through; /* Закреслюємо текст */
-    color: #28a745;
+.todo-item:hover::before {
+    transform: scaleY(1);
 }
