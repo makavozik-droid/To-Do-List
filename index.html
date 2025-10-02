@@ -3,134 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Сучасний планувальник</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>To-Do List</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="planner-app">
-        <header class="planner-header">
-            <h1 class="planner-header__title">
-                <i class="fas fa-calendar-alt"></i> Планувальник
-            </h1>
-            <p class="planner-header__date">Сьогодні, 2 жовтня</p>
-        </header>
 
-        <section class="planner-controls">
-            <input type="text" class="planner-controls__input" placeholder="Додати нове завдання...">
-            <input type="date" class="planner-controls__date">
-            <button class="planner-controls__icon-btn" title="Вибрати іконку">
-                <i class="fas fa-icons"></i>
-            </button>
-            <button class="planner-controls__add-btn">
-                <i class="fas fa-plus"></i>
-            </button>
-        </section>
-        
-        <div class="icon-picker">
-            <i class="fas fa-check-circle" data-icon="check-circle"></i>
-            <i class="fas fa-book-open" data-icon="book-open"></i>
-            <i class="fas fa-shopping-basket" data-icon="shopping-basket"></i>
-            <i class="fas fa-heart" data-icon="heart"></i>
-            <i class="fas fa-star" data-icon="star"></i>
-            <i class="fas fa-lightbulb" data-icon="lightbulb"></i>
-            <i class="fas fa-utensils" data-icon="utensils"></i>
-            <i class="fas fa-plane" data-icon="plane"></i>
+<div class="planner-container">
+    <header class="planner-header">
+        <h1 class="header-title">To-do List</h1>
+        <div class="calendar-nav">
+            <span class="nav-day">s</span>
+            <span class="nav-date nav-date--active">24</span>
+        </div>
+        <div class="calendar-nav">
+            <span class="nav-day">m</span>
+            <span class="nav-date">25</span>
+        </div>
+        <div class="calendar-nav">
+            <span class="nav-day">t</span>
+            <span class="nav-date">26</span>
+        </div>
+        <div class="calendar-nav">
+            <span class="nav-day">w</span>
+            <span class="nav-date">27</span>
+        </div>
+        <div class="calendar-nav">
+            <span class="nav-day">t</span>
+            <span class="nav-date">28</span>
+        </div>
+        <div class="calendar-nav">
+            <span class="nav-day">f</span>
+            <span class="nav-date">29</span>
+        </div>
+        <div class="calendar-nav">
+            <span class="nav-day">s</span>
+            <span class="nav-date">30</span>
+        </div>
+    </header>
+
+    <main class="task-list">
+        <div class="task-item task-item--completed">
+            <div class="task-left">
+                <input type="checkbox" id="task1" class="task-checkbox" checked>
+                <label for="task1" class="task-circle"><i class="fas fa-check"></i></label>
+                <span class="task-text">do homework</span>
+            </div>
+            <span class="task-time">12:00 PM</span>
         </div>
 
-        <ul class="task-list">
-            <li class="task-list__item task-list__item--completed">
-                <input type="checkbox" id="task1" checked>
-                <label for="task1" class="task-list__label">
-                    <span class="task-list__icon-wrapper">
-                        <i class="fas fa-check-circle task-list__icon"></i>
-                    </span>
-                    <span class="task-list__text">Підготувати презентацію</span>
-                </label>
-                 <span class="task-list__date">2025-10-01</span>
-            </li>
-            <li class="task-list__item">
-                <input type="checkbox" id="task2">
-                <label for="task2" class="task-list__label">
-                    <span class="task-list__icon-wrapper">
-                        <i class="fas fa-book-open task-list__icon"></i>
-                    </span>
-                    <span class="task-list__text">Прочитати 10 сторінок</span>
-                </label>
-                 <span class="task-list__date">2025-10-02</span>
-            </li>
-        </ul>
-    </div>
+        <div class="task-item">
+            <div class="task-left">
+                <input type="checkbox" id="task2" class="task-checkbox">
+                <label for="task2" class="task-circle"></label>
+                <span class="task-text">go to grocery store</span>
+            </div>
+            <span class="task-time">1:00 PM</span>
+        </div>
 
-    <script>
-        const addTaskBtn = document.querySelector('.planner-controls__add-btn');
-        const inputField = document.querySelector('.planner-controls__input');
-        const dateInput = document.querySelector('.planner-controls__date');
-        const iconPickerBtn = document.querySelector('.planner-controls__icon-btn');
-        const iconPicker = document.querySelector('.icon-picker');
-        const taskList = document.querySelector('.task-list');
+        <div class="task-item">
+            <div class="task-left">
+                <input type="checkbox" id="task3" class="task-checkbox">
+                <label for="task3" class="task-circle"></label>
+                <span class="task-text">run 5 kilometers</span>
+            </div>
+            <span class="task-time">4:20 PM</span>
+        </div>
         
-        let selectedIcon = 'fa-clipboard-list'; // Іконка за замовчуванням
+    </main>
 
-        // Показати/сховати вибір іконок
-        iconPickerBtn.addEventListener('click', () => {
-            iconPicker.classList.toggle('visible');
-        });
-
-        // Вибір іконки
-        iconPicker.addEventListener('click', (e) => {
-            if (e.target.tagName === 'I') {
-                selectedIcon = e.target.getAttribute('data-icon');
-                iconPickerBtn.innerHTML = `<i class="fas fa-${selectedIcon}"></i>`;
-                iconPicker.classList.remove('visible');
-            }
-        });
-
-        // Додавання завдання
-        addTaskBtn.addEventListener('click', () => {
-            const taskText = inputField.value.trim();
-            const taskDate = dateInput.value;
-            if (taskText) {
-                const newId = `task${Date.now()}`;
-                const newItem = document.createElement('li');
-                newItem.classList.add('task-list__item');
-                newItem.innerHTML = `
-                    <input type="checkbox" id="${newId}">
-                    <label for="${newId}" class="task-list__label">
-                        <span class="task-list__icon-wrapper">
-                            <i class="fas fa-${selectedIcon} task-list__icon"></i>
-                        </span>
-                        <span class="task-list__text">${taskText}</span>
-                    </label>
-                    <span class="task-list__date">${taskDate || 'Без дати'}</span>
-                `;
-                taskList.appendChild(newItem);
-                inputField.value = '';
-                dateInput.value = '';
-                newItem.style.animation = 'slideIn 0.5s ease-in-out';
-                
-                // Додаємо обробник події для чекбокса
-                newItem.querySelector('input[type="checkbox"]').addEventListener('change', (e) => {
-                    if (e.target.checked) {
-                        newItem.classList.add('task-list__item--completed');
-                    } else {
-                        newItem.classList.remove('task-list__item--completed');
-                    }
-                });
-            }
-        });
-
-        // Обробник подій для існуючих чекбоксів
-        document.querySelectorAll('.task-list__item input[type="checkbox"]').forEach(checkbox => {
-            checkbox.addEventListener('change', (e) => {
-                const item = e.target.closest('.task-list__item');
-                if (e.target.checked) {
-                    item.classList.add('task-list__item--completed');
-                } else {
-                    item.classList.remove('task-list__item--completed');
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+    <div class="task-add">
+        <input type="text" id="new-task-text" placeholder="Add new task">
+        <input type="time" id="new-task-time">
+        <button id="add-task-btn">Add</button>
+    </div>
+</div>
