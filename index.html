@@ -3,39 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Список завдань</title>
+    <title>Планувальник завдань</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
-    <style>
-        /* Внутрішній стиль для демонстрації каскадності */
-        .todo-item {
-            font-weight: bold;
-            color: #555;
-        }
-    </style>
 </head>
 <body>
-    <h1>Список завдань</h1>
-    <ul class="todo-list">
-        <li class="todo-item">
-            <input type="checkbox" id="task1">
-            <label for="task1">Купити продукти</label>
-        </li>
-        <li class="todo-item">
-            <input type="checkbox" id="task2">
-            <label for="task2">Підготувати презентацію</label>
-        </li>
-        <li class="todo-item completed">
-            <input type="checkbox" id="task3" checked>
-            <label for="task3">Погуляти з собакою</label>
-        </li>
-        <li class="todo-item">
-            <input type="checkbox" id="task4">
-            <label for="task4">Зателефонувати другу</label>
-        </li>
-        <li class="todo-item completed">
-            <input type="checkbox" id="task5" checked>
-            <label for="task5">Вивчити CSS</label>
-        </li>
-    </ul>
+    <div class="app-container">
+        <header class="app-header">
+            <h1 class="header-title"><i class="fas fa-calendar-check"></i> Планувальник</h1>
+            <p class="header-date">Сьогодні, 2 жовтня</p>
+        </header>
+
+        <section class="add-task-section">
+            <input type="text" id="new-task-input" placeholder="Додати нове завдання...">
+            <button id="add-task-btn" title="Додати завдання"><i class="fas fa-plus"></i></button>
+        </section>
+
+        <ul class="todo-list">
+            <li class="todo-item" data-date="2025-10-02">
+                <input type="checkbox" id="task1">
+                <label for="task1">
+                    <span class="task-icon"><i class="fas fa-shopping-basket"></i></span>
+                    <span class="task-text">Купити продукти</span>
+                </label>
+                <span class="item-date">2 жовтня</span>
+            </li>
+            <li class="todo-item completed" data-date="2025-10-01">
+                <input type="checkbox" id="task2" checked>
+                <label for="task2">
+                    <span class="task-icon"><i class="fas fa-laptop-code"></i></span>
+                    <span class="task-text">Підготувати презентацію</span>
+                </label>
+                <span class="item-date">1 жовтня</span>
+            </li>
+            <li class="todo-item" data-date="2025-10-02">
+                <input type="checkbox" id="task3">
+                <label for="task3">
+                    <span class="task-icon"><i class="fas fa-paw"></i></span>
+                    <span class="task-text">Погуляти з собакою</span>
+                </label>
+                <span class="item-date">2 жовтня</span>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        document.getElementById('add-task-btn').addEventListener('click', function() {
+            const input = document.getElementById('new-task-input');
+            const text = input.value.trim();
+            if (text !== '') {
+                const todoList = document.querySelector('.todo-list');
+                const newItem = document.createElement('li');
+                newItem.classList.add('todo-item');
+                newItem.setAttribute('data-date', '2025-10-02');
+                newItem.innerHTML = `
+                    <input type="checkbox" id="task${Date.now()}">
+                    <label for="task${Date.now()}">
+                        <span class="task-icon"><i class="fas fa-check"></i></span>
+                        <span class="task-text">${text}</span>
+                    </label>
+                    <span class="item-date">2 жовтня</span>
+                `;
+                todoList.appendChild(newItem);
+                input.value = '';
+            }
+        });
+    </script>
 </body>
 </html>
