@@ -1,18 +1,19 @@
-/*==========================================================*/
-/* Змінні та основні стилі */
-/*==========================================================*/
+/* Перетворення шрифту */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
 :root {
-    --bg-color: #e9eef7;
+    --bg-color: #f7f9fc;
     --card-bg-color: #ffffff;
-    --primary-color: #3f51b5; /* Темно-синій */
-    --secondary-color: #2196f3; /* Яскраво-синій */
-    --completed-color: #4caf50; /* Зелений */
-    --text-color: #424242;
-    --border-color: #e0e0e0;
+    --main-blue: #3471c4;
+    --light-blue: #e8f0fe;
+    --text-color: #444;
+    --completed-color: #2e8b57;
+    --light-gray: #c0c0c0;
+    --time-color: #888;
 }
 
 body {
-    font-family: 'Segoe UI', Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
     background-color: var(--bg-color);
     margin: 0;
     display: flex;
@@ -21,200 +22,162 @@ body {
     min-height: 100vh;
 }
 
-.planner-app {
+.planner-container {
     width: 100%;
-    max-width: 450px;
+    max-width: 500px;
     background-color: var(--card-bg-color);
-    border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     overflow: hidden;
-    animation: fadeIn 1s ease-in-out;
 }
 
-/*==========================================================*/
-/* Анімація появи блоку */
-/*==========================================================*/
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-30px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/*==========================================================*/
-/* Стилі для хедера та елементів керування */
-/*==========================================================*/
 .planner-header {
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-    color: white;
-    padding: 30px;
-    text-align: center;
-}
-.planner-header__title {
-    margin: 0;
-    font-size: 1.8em;
-}
-.planner-header__title i {
-    margin-right: 10px;
-    font-size: 1.2em;
-}
-.planner-header__date {
-    opacity: 0.8;
-    margin: 5px 0 0;
-    font-size: 0.9em;
-}
-
-.planner-controls {
-    display: flex;
-    align-items: center;
+    background-color: var(--card-bg-color);
     padding: 20px;
-    background-color: var(--bg-color);
-    gap: 10px;
-}
-.planner-controls__input,
-.planner-controls__date {
-    flex-grow: 1;
-    padding: 12px;
-    border: 2px solid var(--border-color);
-    border-radius: 8px;
-    font-size: 1em;
-    transition: all 0.3s;
-}
-.planner-controls__input:focus,
-.planner-controls__date:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 8px rgba(63, 81, 181, 0.3);
-}
-.planner-controls__add-btn,
-.planner-controls__icon-btn {
-    padding: 12px 18px;
-    border: none;
-    background-color: var(--primary-color);
-    color: white;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: transform 0.3s, background-color 0.3s;
-}
-.planner-controls__add-btn:hover,
-.planner-controls__icon-btn:hover {
-    background-color: var(--secondary-color);
-    transform: scale(1.05);
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    border-bottom: 1px solid var(--light-gray);
 }
 
-/* Меню вибору іконок */
-.icon-picker {
-    display: none;
-    position: absolute;
-    background-color: white;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-.icon-picker.visible {
-    display: flex;
-}
-.icon-picker i {
+.header-title {
     font-size: 1.5em;
-    padding: 5px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.2s, transform 0.2s;
-}
-.icon-picker i:hover {
-    background-color: var(--secondary-color);
-    color: white;
-    transform: scale(1.1);
+    font-weight: 700;
+    color: var(--main-blue);
+    width: 100%;
+    text-align: left;
+    margin-bottom: 15px;
 }
 
-/*==========================================================*/
-/* Стилізація списку завдань */
-/*==========================================================*/
-.task-list {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-.task-list__item {
+.calendar-nav {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    padding: 15px 20px;
-    border-bottom: 1px solid var(--border-color);
-    transition: background-color 0.3s, transform 0.3s;
-    position: relative;
 }
-.task-list__item:hover {
-    background-color: #f5f8ff;
-    transform: translateX(5px);
+
+.nav-day {
+    font-size: 0.9em;
+    text-transform: uppercase;
+    color: var(--light-gray);
 }
-.task-list__item:last-child {
-    border-bottom: none;
+
+.nav-date {
+    font-size: 1.2em;
+    font-weight: 700;
+    color: var(--text-color);
+    background-color: transparent;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
 }
-.task-list__item input[type="checkbox"] {
-    display: none;
+
+.nav-date--active {
+    background-color: var(--main-blue);
+    color: white;
 }
-.task-list__label {
+
+.task-list {
+    padding: 20px;
+}
+
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--light-blue);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.task-left {
     display: flex;
     align-items: center;
     flex-grow: 1;
-    cursor: pointer;
-    font-size: 1.1em;
-    color: var(--text-color);
 }
-.task-list__icon-wrapper {
-    width: 30px;
-    height: 30px;
-    background-color: var(--bg-color);
+
+.task-checkbox {
+    display: none;
+}
+
+.task-circle {
+    width: 25px;
+    height: 25px;
     border-radius: 50%;
+    border: 2px solid var(--main-blue);
     display: flex;
     justify-content: center;
     align-items: center;
     margin-right: 15px;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
 }
-.task-list__icon {
-    color: var(--secondary-color);
-    transition: transform 0.3s;
+
+/* Коли чекбокс відмічений, стилізуємо .task-circle */
+.task-checkbox:checked + .task-circle {
+    background-color: var(--completed-color);
+    border-color: var(--completed-color);
+    color: white;
 }
-.task-list__item:hover .task-list__icon {
-    transform: scale(1.2);
+
+.task-checkbox:checked + .task-circle i {
+    opacity: 1;
+    transform: scale(1);
 }
-.task-list__date {
-    margin-left: auto;
-    font-size: 0.8em;
+
+.task-circle i {
+    font-size: 1.2em;
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.3s ease;
+}
+
+.task-text {
     color: var(--text-color);
-    opacity: 0.7;
+    font-size: 1em;
+    transition: all 0.3s ease;
 }
 
-/*==========================================================*/
-/* Стилізація виконаних завдань */
-/*==========================================================*/
-.task-list__item--completed .task-list__text {
+.task-time {
+    color: var(--time-color);
+    font-size: 0.9em;
+}
+
+/* Стилі для виконаних завдань */
+.task-item--completed .task-text {
     text-decoration: line-through;
-    color: var(--completed-color);
-    opacity: 0.7;
+    color: var(--light-gray);
 }
 
-.task-list__item--completed .task-list__icon {
-    color: var(--completed-color);
-    animation: bounce 0.5s;
+.task-add {
+    display: flex;
+    padding: 20px;
+    gap: 10px;
 }
 
-.task-list__item--completed .task-list__icon-wrapper {
-    background-color: transparent;
-    border: 2px solid var(--completed-color);
-    transition: border-color 0.3s;
+#new-task-text,
+#new-task-time {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
 }
 
-.task-list__item input[type="checkbox"]:checked + .task-list__label .task-list__icon-wrapper .task-list__icon {
-    content: '\f00c'; /* Код для іконки-галочки */
-    font-family: 'Font Awesome 5 Free';
-    font-weight: 900;
+#add-task-btn {
+    padding: 10px 15px;
+    background-color: var(--main-blue);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-@keyframes bounce {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.2); }
+#add-task-btn:hover {
+    background-color: var(--completed-color);
 }
