@@ -38,7 +38,7 @@ body {
     justify-content: space-around;
     text-align: center;
     border-bottom: 1px solid var(--light-gray);
-    flex-wrap: wrap; /* Додано для адаптивності */
+    flex-wrap: wrap;
 }
 
 .header-title {
@@ -98,7 +98,6 @@ body {
     cursor: pointer;
 }
 
-/* Ефект збільшення при наведенні */
 .task-item:hover {
     transform: scale(1.02);
 }
@@ -154,6 +153,7 @@ body {
     font-size: 0.9em;
 }
 
+/* Виправлено: цей селектор тепер коректно закреслює текст */
 .task-item--completed .task-text {
     text-decoration: line-through;
     color: var(--light-gray);
@@ -163,7 +163,7 @@ body {
     display: flex;
     padding: 20px;
     gap: 10px;
-    flex-wrap: wrap; /* Додано для адаптивності */
+    flex-wrap: wrap;
 }
 
 #new-task-text,
