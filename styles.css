@@ -38,6 +38,7 @@ body {
     justify-content: space-around;
     text-align: center;
     border-bottom: 1px solid var(--light-gray);
+    flex-wrap: wrap; /* Додано для адаптивності */
 }
 
 .header-title {
@@ -73,6 +74,7 @@ body {
     justify-content: center;
     align-items: center;
     transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 .nav-date--active {
@@ -94,6 +96,11 @@ body {
     margin-bottom: 15px;
     transition: all 0.3s ease;
     cursor: pointer;
+}
+
+/* Ефект збільшення при наведенні */
+.task-item:hover {
+    transform: scale(1.02);
 }
 
 .task-left {
@@ -118,16 +125,10 @@ body {
     transition: all 0.3s ease;
 }
 
-/* Коли чекбокс відмічений, стилізуємо .task-circle */
 .task-checkbox:checked + .task-circle {
     background-color: var(--completed-color);
     border-color: var(--completed-color);
     color: white;
-}
-
-.task-checkbox:checked + .task-circle i {
-    opacity: 1;
-    transform: scale(1);
 }
 
 .task-circle i {
@@ -135,6 +136,11 @@ body {
     opacity: 0;
     transform: scale(0);
     transition: all 0.3s ease;
+}
+
+.task-checkbox:checked + .task-circle i {
+    opacity: 1;
+    transform: scale(1);
 }
 
 .task-text {
@@ -148,7 +154,6 @@ body {
     font-size: 0.9em;
 }
 
-/* Стилі для виконаних завдань */
 .task-item--completed .task-text {
     text-decoration: line-through;
     color: var(--light-gray);
@@ -158,14 +163,25 @@ body {
     display: flex;
     padding: 20px;
     gap: 10px;
+    flex-wrap: wrap; /* Додано для адаптивності */
 }
 
 #new-task-text,
+#new-task-date,
 #new-task-time {
     flex-grow: 1;
     padding: 10px;
     border: 1px solid var(--border-color);
     border-radius: 5px;
+    font-family: inherit;
+}
+
+#new-task-date {
+    max-width: 150px;
+}
+
+#new-task-time {
+    max-width: 120px;
 }
 
 #add-task-btn {
