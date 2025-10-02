@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список завдань</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Внутрішній стиль для демонстрації каскадності */
+        .todo-item {
+            font-weight: bold;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>Список завдань</h1>
+    <ul class="todo-list">
+        <li class="todo-item">
+            <input type="checkbox" id="task1">
+            <label for="task1">Купити продукти</label>
+        </li>
+        <li class="todo-item">
+            <input type="checkbox" id="task2">
+            <label for="task2">Підготувати презентацію</label>
+        </li>
+        <li class="todo-item completed">
+            <input type="checkbox" id="task3" checked>
+            <label for="task3">Погуляти з собакою</label>
+        </li>
+        <li class="todo-item">
+            <input type="checkbox" id="task4">
+            <label for="task4">Зателефонувати другу</label>
+        </li>
+        <li class="todo-item completed">
+            <input type="checkbox" id="task5" checked>
+            <label for="task5">Вивчити CSS</label>
+        </li>
+    </ul>
+</body>
+</html>
