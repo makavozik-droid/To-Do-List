@@ -64,10 +64,13 @@ body {
 
 .planner-controls {
     display: flex;
+    align-items: center;
     padding: 20px;
     background-color: var(--bg-color);
+    gap: 10px;
 }
-.planner-controls__input {
+.planner-controls__input,
+.planner-controls__date {
     flex-grow: 1;
     padding: 12px;
     border: 2px solid var(--border-color);
@@ -75,13 +78,14 @@ body {
     font-size: 1em;
     transition: all 0.3s;
 }
-.planner-controls__input:focus {
+.planner-controls__input:focus,
+.planner-controls__date:focus {
     outline: none;
     border-color: var(--primary-color);
     box-shadow: 0 0 8px rgba(63, 81, 181, 0.3);
 }
-.planner-controls__add-btn {
-    margin-left: 10px;
+.planner-controls__add-btn,
+.planner-controls__icon-btn {
     padding: 12px 18px;
     border: none;
     background-color: var(--primary-color);
@@ -90,9 +94,39 @@ body {
     cursor: pointer;
     transition: transform 0.3s, background-color 0.3s;
 }
-.planner-controls__add-btn:hover {
+.planner-controls__add-btn:hover,
+.planner-controls__icon-btn:hover {
     background-color: var(--secondary-color);
     transform: scale(1.05);
+}
+
+/* Меню вибору іконок */
+.icon-picker {
+    display: none;
+    position: absolute;
+    background-color: white;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.icon-picker.visible {
+    display: flex;
+}
+.icon-picker i {
+    font-size: 1.5em;
+    padding: 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+.icon-picker i:hover {
+    background-color: var(--secondary-color);
+    color: white;
+    transform: scale(1.1);
 }
 
 /*==========================================================*/
@@ -145,43 +179,42 @@ body {
     transition: transform 0.3s;
 }
 .task-list__item:hover .task-list__icon {
-    transform: scale(1.2); /* Збільшення іконки при наведенні */
+    transform: scale(1.2);
+}
+.task-list__date {
+    margin-left: auto;
+    font-size: 0.8em;
+    color: var(--text-color);
+    opacity: 0.7;
 }
 
 /*==========================================================*/
 /* Стилізація виконаних завдань */
 /*==========================================================*/
-.task-list__item--completed {
-    background-color: #e8f5e9;
-    opacity: 0.8;
-}
 .task-list__item--completed .task-list__text {
     text-decoration: line-through;
     color: var(--completed-color);
     opacity: 0.7;
 }
+
 .task-list__item--completed .task-list__icon {
     color: var(--completed-color);
+    animation: bounce 0.5s;
 }
+
 .task-list__item--completed .task-list__icon-wrapper {
     background-color: transparent;
     border: 2px solid var(--completed-color);
-}
-.task-list__item input[type="checkbox"]:checked + .task-list__label .task-list__text {
-    text-decoration: line-through;
-    color: var(--completed-color);
-    opacity: 0.7;
-}
-.task-list__item input[type="checkbox"]:checked + .task-list__label .task-list__icon {
-    color: var(--completed-color);
-}
-.task-list__item input[type="checkbox"]:checked + .task-list__label .task-list__icon-wrapper {
-    background-color: transparent;
-    border: 2px solid var(--completed-color);
+    transition: border-color 0.3s;
 }
 
-/* Анімація для спливаючих елементів */
-@keyframes slideIn {
-    from { transform: translateX(100%); }
-    to { transform: translateX(0); }
+.task-list__item input[type="checkbox"]:checked + .task-list__label .task-list__icon-wrapper .task-list__icon {
+    content: '\f00c'; /* Код для іконки-галочки */
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
 }
